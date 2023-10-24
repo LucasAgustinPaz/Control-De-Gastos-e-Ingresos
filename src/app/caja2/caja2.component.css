@@ -1,0 +1,17 @@
+/* Estilos específicos para la caja 2 */
+.caja {
+  background: #7ec0ee;
+    border: 1px solid #ddd;
+    padding: 55px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Estilo específico para el título de la caja 2 */
+  h2 {
+    font-size: 24px;
+    color: #ffffff;
+  }
+  
+  /* Otros estilos específicos de la caja 2, si es necesario */
+  

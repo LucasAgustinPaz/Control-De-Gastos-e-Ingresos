@@ -1,0 +1,15 @@
+/* Estilos para el componente disponible-para-gastar */
+.disponible-para-gastar {
+    margin-top: 20px; /* Agrega un margen superior para separarlo de las cajas */
+    font-family: 'Arial', sans-serif;
+  }
+  
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+  }
+  

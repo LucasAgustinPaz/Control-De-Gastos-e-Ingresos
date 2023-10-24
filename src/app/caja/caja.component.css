@@ -1,0 +1,20 @@
+.caja {
+  background: linear-gradient(to bottom, #c13ddb, #d197e3);
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.titulo{
+  font-size: 20px;
+  color: #ffffff;
+}
+.valor {
+  font-size: 25px;
+  color: #ffffff;
+}
+.balance{
+  font-size: 15px;
+  color: #ffffff;
+}
