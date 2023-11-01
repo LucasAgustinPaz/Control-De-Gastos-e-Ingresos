@@ -4,6 +4,11 @@
     align-items: center;
     width: 100%; 
 }
+
+.containerTitle{
+  padding: 10px;
+}
+
 .caja-container {
   width: 50%; /* Cada caja ocupa el 50% del ancho disponible */
   box-sizing: border-box; /* Incluye el ancho del borde y el margen en el 50% */
