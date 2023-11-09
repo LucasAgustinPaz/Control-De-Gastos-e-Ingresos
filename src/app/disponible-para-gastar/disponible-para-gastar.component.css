@@ -1,15 +1,68 @@
-/* Estilos para el componente disponible-para-gastar */
+/* disponible-para-gastar.component.css */
 .disponible-para-gastar {
-    margin-top: 20px; /* Agrega un margen superior para separarlo de las cajas */
-    font-family: 'Arial', sans-serif;
-  }
-  
-  select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: 'Arial', sans-serif;
-  }
-  
+  background-color: #f0f0f0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.account-selector {
+  display: flex;
+  align-items: center;
+}
+
+select {
+  width: 60%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button.toggle-button {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 10px; /* Ajuste para la posición inicial */
+  position: relative;
+}
+
+button.toggle-button::before {
+  content: "Presione este boton para activar/desactivar su cuenta del balance total"; /* Puedes cambiar esto a un icono o símbolo informativo */
+  font-size: 14px;
+  color: #007bff;
+  position: absolute;
+  display: none;
+  background-color: #fff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 50px; /* Ajuste para la posición */
+  z-index: 1;
+  white-space: nowrap;
+}
+
+button.toggle-button:hover::before {
+  display: block;
+}
+
+button.toggle-button.active {
+  background-color: #4CAF50;
+  border: 2px solid #4CAF50;
+}
+
+button.toggle-button.inactive {
+  background-color: #f44336;
+  border: 2px solid #f44336;
+}
+
+p {
+  font-size: 18px;
+  font-family: 'Arial', sans-serif;
+}

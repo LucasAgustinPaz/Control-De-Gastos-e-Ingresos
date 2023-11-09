@@ -15,6 +15,9 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { AnalisisComponent } from './analisis/analisis.component';
 import { TransaccionesComponent } from './transacciones/transacciones.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -28,10 +31,13 @@ import { InicioComponent } from './inicio/inicio.component';
     CalendarioComponent,
     AnalisisComponent,
     TransaccionesComponent,
-    InicioComponent
+    InicioComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

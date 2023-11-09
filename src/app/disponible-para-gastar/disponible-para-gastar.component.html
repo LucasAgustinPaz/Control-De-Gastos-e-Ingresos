@@ -1,8 +1,13 @@
 <div class="disponible-para-gastar">
-    <h3>Disponible para Gastar</h3>
-    <select>
+  <h3>Disponible para Gastar</h3>
+  <div class="account-selector">
+    <select [(ngModel)]="selectedAccount" (change)="onAccountChange()">
       <option value="" disabled selected>Selecciona una cuenta</option>
-      <!-- Otras opciones de cuenta aquí -->
+      <option *ngFor="let account of accounts" [value]="account.name">{{ account.name }}</option>
     </select>
+    <button (click)="toggleAccount()" [ngClass]="{'active': isAccountActive(selectedAccount)}" class="toggle-button">
+      {{ isAccountActive(selectedAccount) ? '✔' : '✘' }}
+    </button>
   </div>
-  
+  <p *ngIf="availableBalance">Saldo disponible: {{ availableBalance | currency }}</p>
+</div>
