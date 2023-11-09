@@ -3,3 +3,49 @@
 <div class="containerTitle">
     <app-titulo-general [titulo]="'Transacciones'"></app-titulo-general>
 </div>
+<div class="transacciones-form">
+    <label for="tipoTransaccion">Tipo de Transacción:</label>
+    <select id="tipoTransaccion" [(ngModel)]="tipoTransaccion">
+      <option value="INGRESO">Ingreso</option>
+      <option value="GASTO">Gasto</option>
+    </select>
+  
+    <div *ngIf="tipoTransaccion === 'INGRESO'">
+      <label for="monto">Monto:</label>
+      <input type="text" id="monto" [(ngModel)]="montoIngreso" placeholder="Ingrese el monto">
+  
+      <label for="descripcion">Descripción:</label>
+      <input type="text" id="descripcion" [(ngModel)]="descripcionIngreso" placeholder="Ingrese la descripción">
+  
+      <label for="cuentaIngreso">Cuenta:</label>
+      <input type="text" id="cuentaIngreso" [(ngModel)]="cuentaIngreso" placeholder="Ingrese la cuenta">
+  
+      <button (click)="realizarIngreso()">Realizar Ingreso</button>
+    </div>
+  
+    <div *ngIf="tipoTransaccion === 'GASTO'">
+      <label for="monto">Monto:</label>
+      <input type="text" id="monto" [(ngModel)]="montoGasto" placeholder="Ingrese el monto">
+  
+      <label for="descripcion">Descripción:</label>
+      <input type="text" id="descripcion" [(ngModel)]="descripcionGasto" placeholder="Ingrese la descripción">
+  
+      <label for="categoria">Categoría:</label>
+      <select id="categoria" [(ngModel)]="categoriaGasto">
+        <option value="comida">Comida</option>
+        <option value="entretenimiento">Entretenimiento</option>
+        <option value="salud">Salud</option>
+        <option value="ropa">Ropa</option>
+        <option value="servicios">Servicios</option>
+        <option value="suscripciones">Suscripciones</option>
+        <option value="transporte">Transporte</option>
+        <option value="seguros">Seguros</option>
+      </select>
+  
+      <label for="cuentaGasto">Cuenta:</label>
+      <input type="text" id="cuentaGasto" [(ngModel)]="cuentaGasto" placeholder="Ingrese la cuenta">
+  
+      <button (click)="realizarGasto()">Realizar Gasto</button>
+    </div>
+  </div>
+  
