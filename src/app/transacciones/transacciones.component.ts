@@ -32,7 +32,7 @@ export class TransaccionesComponent {
       cuenta: this.cuentaIngreso
     };
 
-    this.walletService.sumarBalance(idWallet, ingresoData).subscribe(
+    this.walletService.sumarBalance("idWallet", ingresoData).subscribe(
       (respuesta) => {
         console.log('Balance sumado con éxito', respuesta);
         // Realiza acciones adicionales si es necesario
@@ -52,7 +52,7 @@ export class TransaccionesComponent {
       cuenta: this.cuentaGasto
     };
 
-    this.walletService.restarBalance(idWallet, gastoData).subscribe(
+    this.walletService.restarBalance("idWallet", gastoData).subscribe(
       (respuesta) => {
         console.log('Balance restado con éxito', respuesta);
         // Realiza acciones adicionales si es necesario

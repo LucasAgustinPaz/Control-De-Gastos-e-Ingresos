@@ -1,3 +1,51 @@
-.containerTitle{
+/* Mantén o ajusta los estilos según tus preferencias */
+.container {
+    margin-top: 20px;
+  }
+  
+  h3 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .row {
+    margin-bottom: 20px;
+  }
+  
+  .month-container {
+    background-color: #f9f9f9;
     padding: 10px;
-}
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .month {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  td {
+    cursor: pointer;
+  }
+  
+  td:hover {
+    background-color: #ddd;
+  }
+  

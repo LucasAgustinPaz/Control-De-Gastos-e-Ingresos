@@ -1,4 +1,45 @@
 <app-barra-inferior-nav></app-barra-inferior-nav>
-<div class="containerTitle">
-    <app-titulo-general [titulo]="'Calendario'"></app-titulo-general>
-</div>
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>Calendario</h3>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="selectYear">Año:</label>
+          <select id="selectYear" class="form-control" [(ngModel)]="selectedYear">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="selectMonth">Mes:</label>
+          <select id="selectMonth" class="form-control" [(ngModel)]="selectedMonth">
+            <option *ngFor="let month of months; let i = index" [value]="i+1">{{ month }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="month-container">
+          <div class="month">{{ months[selectedMonth - 1] }} {{ selectedYear }}</div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th *ngFor="let day of ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']">{{ day }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let week of getWeeksInMonth(selectedMonth, selectedYear)">
+                <td *ngFor="let day of getDaysInMonth(selectedMonth, selectedYear, week)">
+                  {{ day > 0 ? day : '' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

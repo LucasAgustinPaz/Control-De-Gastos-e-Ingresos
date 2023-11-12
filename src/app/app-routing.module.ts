@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'calendario', component: CalendarioComponent },
   { path: 'analisis', component: AnalisisComponent },
   { path: 'transacciones', component: TransaccionesComponent },
+
 ];
 
 @NgModule({
