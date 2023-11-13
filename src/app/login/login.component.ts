@@ -1,5 +1,8 @@
+// login.component.ts
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { WalletAPIService } from '../wallet-api.service';
 
 @Component({
   selector: 'app-login',
@@ -8,26 +11,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   usuario = {
-    nombreUsuario: '',
+    email: '', // Ajusta según la estructura de tu servicio
     contrasena: ''
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private walletService: WalletAPIService) {}
 
   onSubmit() {
-    // Recuperar la lista actual de usuarios desde localStorage (si existe)
-    const usuariosRegistradosString = localStorage.getItem('usuarios');
-    const usuariosRegistrados = usuariosRegistradosString ? JSON.parse(usuariosRegistradosString) : [];
+    this.walletService.iniciarSesion(this.usuario.email, this.usuario.contrasena).subscribe(
+      (response: any) => {
+        console.log('Inicio de sesión exitoso:', response);
+        // Guarda el mail en memoria local
+        const userId = this.usuario.email;
+        localStorage.setItem('userId', userId);
 
-    // Verificar las credenciales del usuario
-    const usuarioAutenticado = usuariosRegistrados.find((u: any) => u.nombreUsuario === this.usuario.nombreUsuario && u.contrasena === this.usuario.contrasena);
-
-    if (usuarioAutenticado) {
-      // Autenticación exitosa, redirige al usuario a la página principal
-      this.router.navigate(['/inicio']);
-    } else {
-      // Autenticación fallida, puedes mostrar un mensaje de error
-      console.log('Inicio de sesión fallido. Verifica tus credenciales.');
-    }
+        // Redirige al usuario a la página principal después de iniciar sesión
+        this.router.navigate(['/inicio']);
+      },
+      (error: any) => {
+        console.error('Inicio de sesión fallido. Verifica tus credenciales.', error);
+        // Puedes manejar el error aquí (por ejemplo, mostrar un mensaje de error al usuario)
+      }
+    );
   }
 }

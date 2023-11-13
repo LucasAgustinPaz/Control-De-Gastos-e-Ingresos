@@ -25,7 +25,13 @@ export class WalletAPIService {
     return this.http.post('https://ejemplo.com/api/enviar', datos);
   }
   
-  
+   // Nuevo método para crear un usuario
+   crearUsuario(usuarioData: any): Observable<any> {
+    const url = 'https://wallet37.p.rapidapi.com/user/sign-up';
+
+    return this.http.post(url, usuarioData, { headers: this.headers });
+  }
+
   // Nuevo método para obtener datos del usuario por token
   getUserByToken(token: string): Observable<any> {
     const url = `https://wallet37.p.rapidapi.com/user/token/${token}`;

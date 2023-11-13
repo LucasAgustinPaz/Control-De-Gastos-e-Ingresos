@@ -8,6 +8,9 @@
     <button (click)="toggleAccount()" [ngClass]="{'active': isAccountActive(selectedAccount)}" class="toggle-button">
       {{ isAccountActive(selectedAccount) ? '✔' : '✘' }}
     </button>
+
+    <button (click)="navigateToNewAccountForm()">Crear Nueva Cuenta</button>
+
   </div>
   <p *ngIf="availableBalance">Saldo disponible: {{ availableBalance | currency }}</p>
 </div>

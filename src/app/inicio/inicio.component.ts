@@ -6,7 +6,7 @@ import { AccountService } from '../accounts.service'; // Ajusta la ruta al servi
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent implements OnInit{
+export class InicioComponent implements OnInit {
   totalBalance: number = 0;
 
   constructor(private accountService: AccountService) {
@@ -21,7 +21,16 @@ export class InicioComponent implements OnInit{
   }
 
   calculateTotalBalance() {
-    const activeAccounts = this.accountService.getActiveAccounts();
-    this.totalBalance = activeAccounts.reduce((total, account) => total + account.balance, 0);
+    const userId = localStorage.getItem('userId');
+
+
+    if (userId !== null) {
+      console.log('ID del usuario:', userId);
+      const activeAccounts = this.accountService.getActiveAccounts(userId);
+      this.totalBalance = activeAccounts.reduce((total, account) => total + account.balance, 0);
+    } else {
+      console.error('No se encontró el ID del usuario en el localStorage');
+    }
+
   }
 }

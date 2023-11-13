@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { WalletAPIService } from '../wallet-api.service';
 
 @Component({
   selector: 'app-register',
@@ -7,27 +8,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  usuario = {
-    nombreUsuario: '',
-    correoElectronico: '',
-    contrasena: ''
+  usuarioData = {
+    name: '',
+    email: '',
+    cellphone: '',
+    password: '',
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private walletService: WalletAPIService) {}
 
   onSubmit() {
-    // Recuperar la lista actual de usuarios desde localStorage (si existe)
-    const usuariosRegistradosString = localStorage.getItem('usuarios');
-    const usuariosRegistrados = usuariosRegistradosString ? JSON.parse(usuariosRegistradosString) : [];
-
-
-    // Agregar el nuevo usuario a la lista
-    usuariosRegistrados.push(this.usuario);
-
-    // Almacenar la lista actualizada en localStorage
-    localStorage.setItem('usuarios', JSON.stringify(usuariosRegistrados));
-
-    // Redirigir al usuario a la página de inicio de sesión después de un registro exitoso
-    this.router.navigate(['/']);
+    this.walletService.crearUsuario(this.usuarioData).subscribe(
+      (response: any) => {
+        console.log('Usuario creado con éxito:', response);
+        this.router.navigate(['/']);
+      },
+      (error: any) => {
+        console.error('Error al crear usuario:', error);
+      }
+    );
   }
 }

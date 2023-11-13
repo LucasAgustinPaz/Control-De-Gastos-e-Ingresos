@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { WalletAPIService } from './wallet-api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NuevaCuentaComponent } from './nueva-cuenta/nueva-cuenta.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     InicioComponent,
     LoginComponent,
     RegisterComponent,
+    NuevaCuentaComponent,
   ],
   imports: [
     BrowserModule,

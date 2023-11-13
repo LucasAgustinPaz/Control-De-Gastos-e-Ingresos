@@ -1,0 +1,19 @@
+<h2>Crear Nueva Cuenta</h2>
+<!-- Formulario para crear una nueva cuenta -->
+<form>
+  <label for="accountName">Nombre de la cuenta:</label>
+  <input type="text" id="accountName" [(ngModel)]="newAccountName" required>
+
+  <label for="accountBalance">Balance:</label>
+  <input type="number" id="accountBalance" [(ngModel)]="newAccountBalance" required>
+
+  <label for="currencySelector">Moneda:</label>
+  <select id="currencySelector" [(ngModel)]="selectedCurrency">
+    <option value="USD">USD</option>
+    <option value="ARS">ARS</option>
+    <option value="EUR">EUR</option>
+  </select>
+
+  <button type="button" (click)="crearNuevaCuenta(newAccountName, selectedCurrency ,newAccountBalance)">Crear Cuenta</button>
+</form>
+
