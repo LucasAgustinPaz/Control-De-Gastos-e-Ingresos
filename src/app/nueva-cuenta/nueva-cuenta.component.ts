@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./nueva-cuenta.component.css']
 })
 
-
 export class NuevaCuentaComponent {
   // Propiedades para almacenar datos del nuevo formulario
   newAccountName: string = '';
@@ -30,7 +29,7 @@ export class NuevaCuentaComponent {
           console.log('Nueva cuenta creada con éxito.');
           // Actualiza la lista de cuentas en el componente (puedes llamar a getAccounts o cualquier otro método necesario)
           this.walletService.getUserWallets(userId);
-          this.router.navigate(['/']);
+          this.router.navigate(['/inicio']);
         },
         (error) => {
           // Maneja el error al crear la cuenta (por ejemplo, muestra un mensaje al usuario)
@@ -39,9 +38,6 @@ export class NuevaCuentaComponent {
       );
     } else {
       console.error('No se encontró el ID del usuario en el localStorage');
-
     }
-
   }
 }
-
