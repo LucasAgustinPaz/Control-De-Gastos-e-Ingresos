@@ -19,11 +19,19 @@ export class NuevaCuentaComponent {
 
   // Método para manejar la creación de una nueva cuenta
   crearNuevaCuenta(cuentaNombre: string, moneda: string, balance: number): void {
-    const userId = localStorage.getItem('userId');
+    //const userId = localStorage.getItem('userId');
+    const accountData = {
+      name: 'Cuenta dni',
+      usersIds: [
+        '6492f433139a79cae6a3149e'
+      ],
+      currency: 'ARS', // Cambia a 'ARS' para pesos argentinos
+      balance: 1500}
 
-    if (userId !== null) {
-      console.log('ID del usuario:', userId);
-      this.accountService.crearNuevaCuenta('6492f433139a79cae6a3149e', cuentaNombre, moneda, balance).subscribe(
+    //f (userId !== null) {
+      //console.log('ID del usuario:', userId);
+      this.walletService.crearWallet(accountData).subscribe(
+      //this.accountService.crearNuevaCuenta('6492f433139a79cae6a3149e', cuentaNombre, moneda, balance).subscribe(
         () => {
           // La cuenta se creó con éxito
           console.log('Nueva cuenta creada con éxito.');
@@ -36,8 +44,8 @@ export class NuevaCuentaComponent {
           console.error('Error al crear nueva cuenta:', error);
         }
       );
-    } else {
-      console.error('No se encontró el ID del usuario en el localStorage');
-    }
+   // } else {
+    //  console.error('No se encontró el ID del usuario en el localStorage');
+    //}
   }
 }

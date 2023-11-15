@@ -11,7 +11,7 @@ export class WalletAPIService {
   private apiUrl = 'https://wallet37.p.rapidapi.com/wallet';
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'X-RapidAPI-Key': '14a24bc25dmsh3c1d1ae71c1dab5p1077f7jsn0a6478e24c6f',
+    'X-RapidAPI-Key': '6cdd346af7msh3c5fbc5ddbacd0bp18250fjsn1a340acd731f',
     'X-RapidAPI-Host': 'wallet37.p.rapidapi.com',
   });
 

@@ -32,20 +32,14 @@ export class DisponibleParaGastarComponent implements OnInit {
   }
 
   toggleAccount() {
-    const userId = localStorage.getItem('userId');
 
-    if (userId !== null) {
-      console.log('ID del usuario:', userId);
       const selectedAccount = this.getSelectedAccount();
       if (selectedAccount) {
         selectedAccount.active = !selectedAccount.active;
-        this.accountService.updateAccountBalance(userId, selectedAccount.name, selectedAccount.balance);
+        this.accountService.updateAccountBalance("6492f433139a79cae6a3149e", selectedAccount.name, selectedAccount.balance);
         this.accountService.notifyAccountStatusChanged();
         this.updateTotalBalance();
       }
-    } else {
-      console.error('No se encontró el ID del usuario en el localStorage');
-    }
   }
 
   isAccountActive(accountName: string): boolean {
@@ -58,11 +52,7 @@ export class DisponibleParaGastarComponent implements OnInit {
   }
 
   getAccounts(): void {
-    const userId = localStorage.getItem('userId');
-
-    if (userId !== null) {
-      console.log('ID del usuario:', userId);
-      this.walletService.getUserWallets(userId).subscribe(
+      this.walletService.getUserWallets("6492f433139a79cae6a3149e").subscribe(
         (response: any[]) => {
           console.log("Respuesta de get user wallets: ", response);
           this.accounts = response.map((wallet: any) => ({
@@ -78,9 +68,6 @@ export class DisponibleParaGastarComponent implements OnInit {
           console.error('Error al obtener las cuentas del usuario:', error);
         }
       );
-    } else {
-      console.error('No se encontró el ID del usuario en el localStorage');
-    }
   }
 
   /*getAccounts(): void {
