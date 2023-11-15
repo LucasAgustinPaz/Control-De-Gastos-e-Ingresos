@@ -23,13 +23,13 @@ export class NuevaCuentaComponent {
 
     if (userId !== null) {
       console.log('ID del usuario:', userId);
-      this.accountService.crearNuevaCuenta(userId, cuentaNombre, moneda, balance).subscribe(
+      this.accountService.crearNuevaCuenta('6492f433139a79cae6a3149e', cuentaNombre, moneda, balance).subscribe(
         () => {
           // La cuenta se creó con éxito
           console.log('Nueva cuenta creada con éxito.');
           // Actualiza la lista de cuentas en el componente (puedes llamar a getAccounts o cualquier otro método necesario)
-          this.walletService.getUserWallets(userId);
-          this.router.navigate(['/inicio']);
+          this.walletService.getUserWallets('6492f433139a79cae6a3149e');
+          this.router.navigate(['/']);
         },
         (error) => {
           // Maneja el error al crear la cuenta (por ejemplo, muestra un mensaje al usuario)

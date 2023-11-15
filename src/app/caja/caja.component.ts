@@ -1,3 +1,5 @@
+// caja.component.ts
+
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -6,7 +8,10 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./caja.component.css']
 })
 export class CajaComponent {
-  @Input() titulo: string = 'Título Predeterminado';
-  @Input() valor: string = '$0.00';
-  @Input() balance: string = 'Balance Total';
+  @Input() titulo: string = '';
+  @Input() valor: string = '';
+  @Input() balance: string = '';
+  @Input() totalBalance: number = 0;
+
+  constructor() { }
 }

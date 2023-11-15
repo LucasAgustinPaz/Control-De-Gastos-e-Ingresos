@@ -1,5 +1,7 @@
+// inicio.component.ts
+
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../accounts.service'; // Ajusta la ruta al servicio
+import { AccountService } from '../accounts.service';
 
 @Component({
   selector: 'app-inicio',
@@ -9,20 +11,17 @@ import { AccountService } from '../accounts.service'; // Ajusta la ruta al servi
 export class InicioComponent implements OnInit {
   totalBalance: number = 0;
 
-  constructor(private accountService: AccountService) {
-    this.calculateTotalBalance();
-  }
+  constructor(private accountService: AccountService) {}
 
   ngOnInit() {
     this.calculateTotalBalance();
-    this.accountService.accountStatusChanged.subscribe(() => {
+    this.accountService.accountStatusChanged$.subscribe(() => {
       this.calculateTotalBalance();
     });
   }
 
   calculateTotalBalance() {
     const userId = localStorage.getItem('userId');
-
 
     if (userId !== null) {
       console.log('ID del usuario:', userId);
@@ -31,6 +30,5 @@ export class InicioComponent implements OnInit {
     } else {
       console.error('No se encontró el ID del usuario en el localStorage');
     }
-
   }
 }

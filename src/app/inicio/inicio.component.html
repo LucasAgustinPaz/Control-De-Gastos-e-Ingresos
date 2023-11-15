@@ -1,10 +1,12 @@
+<!-- inicio.component.html -->
+
 <div class="containerTitle">
   <app-titulo-general [titulo]="'Inicio'"></app-titulo-general>
 </div>
 
 <div class="container">
   <div class="caja-container">
-    <app-caja [titulo]="'Cuentas'" [valor]="'$' + totalBalance" [balance]="'Balance Total'"></app-caja>
+    <app-caja [titulo]="'Cuentas'" [valor]="'$' + totalBalance" [balance]="'Balance Total'" [totalBalance]="totalBalance"></app-caja>
   </div>
   <div class="caja-container">
     <app-caja2 [titulo]="'Configura tu ingreso aquí'"></app-caja2>
