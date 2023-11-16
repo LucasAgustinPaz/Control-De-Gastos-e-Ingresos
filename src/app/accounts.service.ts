@@ -25,6 +25,8 @@ export class AccountService {
   private walletArraySubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public walletArray$: Observable<any[]> = this.walletArraySubject.asObservable();
   constructor(private walletService: WalletAPIService) { }
+  private totalBalanceSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  totalBalance$: Observable<number> = this.totalBalanceSubject.asObservable();
 
 
   crearNuevaCuenta(userId: string, cuentaNombre: string, moneda: string, balance: number): Observable<void> {
@@ -101,14 +103,22 @@ export class AccountService {
     const walletArray = this.walletArraySubject.value.slice(); 
     let i = 0;
     while (i < walletArray.length) {
-      if (walletArray[i].id === idWallet) {
-        walletArray[i].balance += balanceToAdd;
-        break;
-      }
-      i++;
+        if (walletArray[i].id === idWallet) {
+
+            const balanceToAddAsNumber = typeof balanceToAdd === 'number' ? balanceToAdd : parseFloat(balanceToAdd);
+            if (!isNaN(balanceToAddAsNumber)) {
+              walletArray[i].balance = +walletArray[i].balance + +balanceToAdd;
+            } else {
+                console.error('No se pudo convertir balanceToAdd a número:', balanceToAdd);
+            }
+            break;
+        }
+        i++;
     }
     this.walletArraySubject.next(walletArray);
-  }
+}
+
+
 
   restarBalance(idWallet: string, balanceToSubtract: number): void {
     const walletArray = this.walletArraySubject.value.slice(); 
@@ -122,5 +132,10 @@ export class AccountService {
     }
     this.walletArraySubject.next(walletArray);
   }
+
+
+updateTotalBalance(newTotalBalance: number): void {
+  this.totalBalanceSubject.next(newTotalBalance);
 }
 
+}

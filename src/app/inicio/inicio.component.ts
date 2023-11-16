@@ -9,7 +9,7 @@ import { AccountService } from '../accounts.service';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
-  totalBalance: number = 0;
+  balanceTotal: number = 0;
   accounts: { id: string,name: string, balance: number, currency: string, active: boolean }[] = [];
   constructor(private accountService: AccountService) {}
 
@@ -24,18 +24,11 @@ export class InicioComponent implements OnInit {
         console.error('Error al recibir actualizaciones del array de billeteras:', error);
       }
     );
-  }
-  
 
-  calculateTotalBalance() {
-    const userId = localStorage.getItem('userId');
+    this.accountService.totalBalance$.subscribe((totalBalance: number) => {
+      this.balanceTotal = totalBalance;
+    });
 
-    if (userId !== null) {
-      console.log('ID del usuario:', userId);
-      const activeAccounts = this.accountService.getActiveAccounts(userId);
-      this.totalBalance = activeAccounts.reduce((total, account) => total + account.balance, 0);
-    } else {
-      console.error('No se encontró el ID del usuario en el localStorage');
-    }
+    console.log("Plata Total: ", this.balanceTotal);
   }
 }
