@@ -27,17 +27,14 @@ export class NuevaCuentaComponent {
       currency: moneda, // Cambia a 'ARS' para pesos argentinos
       balance: balance1}
 
-      this.walletService.crearWallet(accountData).subscribe(
-      //this.accountService.crearNuevaCuenta('6492f433139a79cae6a3149e', cuentaNombre, moneda, balance).subscribe(
-        () => {
-          // La cuenta se creó con éxito
-          console.log('Nueva cuenta creada con éxito.');
-          this.router.navigate(['/']);
+      this.accountService.crearNuevaCuenta(accountData).subscribe(
+        (nuevaCuenta) => {
+          console.log('Nueva cuenta creada con éxito:', nuevaCuenta);
+          this.router.navigate(['/inicio']);
         },
         (error) => {
-          // Maneja el error al crear la cuenta (por ejemplo, muestra un mensaje al usuario)
-          console.error('Error al crear nueva cuenta:', error);
+          console.error('Error al crear la nueva cuenta:', error);
         }
-      ); 
+      );
   }
 }

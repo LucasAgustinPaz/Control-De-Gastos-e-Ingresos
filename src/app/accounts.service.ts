@@ -29,20 +29,36 @@ export class AccountService {
   totalBalance$: Observable<number> = this.totalBalanceSubject.asObservable();
 
 
-  crearNuevaCuenta(userId: string, cuentaNombre: string, moneda: string, balance: number): Observable<void> {
-    const cuentaExistente = this.userAccounts[userId]?.find(account => account.name === cuentaNombre);
+  crearNuevaCuenta(walletData: any): Observable<void> {
+    return this.walletService.crearWallet(walletData).pipe(
+      map((newWallet: any) => {
+        // Verifica si ya existe una billetera con el mismo nombre
+        const walletNameExists = this.walletArraySubject.value.some(
+          (wallet) => wallet.name === newWallet.name
+        );
 
-    if (cuentaExistente) {
-      return throwError('El nombre de la cuenta ya existe.');
-    }
+        if (!walletNameExists) {
+          // Agrega la nueva billetera al arreglo existente
+          const currentWallets = this.walletArraySubject.value.slice();
+          currentWallets.push({
+            id: newWallet._id,
+            name: newWallet.name,
+            balance: newWallet.balance,
+            currency: newWallet.currency,
+            active: true
+          });
 
-    const nuevaCuenta = { name: cuentaNombre, balance: 0, active: true };
-    this.userAccounts[userId] = [...(this.userAccounts[userId] || []), nuevaCuenta];
+          // Actualiza el arreglo y emite el nuevo estado
+          this.walletArraySubject.next(currentWallets);
 
-    this.createWalletForAccount(userId, cuentaNombre, moneda, balance);
-    this.notifyAccountStatusChanged();
-
-    return of(undefined);
+          // Devuelve la nueva billetera
+          return newWallet;
+        } else {
+          // Si ya existe una billetera con el mismo nombre, puedes manejarlo según tus necesidades
+          throw new Error('Ya existe una billetera con el mismo nombre.');
+        }
+      })
+    );
   }
 
   private createWalletForAccount(userId: string, name: string, moneda: string, balance: number): void {
@@ -100,33 +116,18 @@ export class AccountService {
   }
 
   sumarBalance(idWallet: string, balanceToAdd: number): void {
-    const walletArray = this.walletArraySubject.value.slice(); 
-    let i = 0;
-    while (i < walletArray.length) {
-        if (walletArray[i].id === idWallet) {
-
-            const balanceToAddAsNumber = typeof balanceToAdd === 'number' ? balanceToAdd : parseFloat(balanceToAdd);
-            if (!isNaN(balanceToAddAsNumber)) {
-              walletArray[i].balance = +walletArray[i].balance + +balanceToAdd;
-            } else {
-                console.error('No se pudo convertir balanceToAdd a número:', balanceToAdd);
-            }
-            break;
-        }
-        i++;
-    }
-    this.walletArraySubject.next(walletArray);
-}
-
-
-
-  restarBalance(idWallet: string, balanceToSubtract: number): void {
-    const walletArray = this.walletArraySubject.value.slice(); 
+    const walletArray = this.walletArraySubject.value.slice();
     let i = 0;
     while (i < walletArray.length) {
       if (walletArray[i].id === idWallet) {
-        walletArray[i].balance = Math.max(0, walletArray[i].balance - balanceToSubtract);
-        break; 
+
+        const balanceToAddAsNumber = typeof balanceToAdd === 'number' ? balanceToAdd : parseFloat(balanceToAdd);
+        if (!isNaN(balanceToAddAsNumber)) {
+          walletArray[i].balance = +walletArray[i].balance + +balanceToAdd;
+        } else {
+          console.error('No se pudo convertir balanceToAdd a número:', balanceToAdd);
+        }
+        break;
       }
       i++;
     }
@@ -134,8 +135,51 @@ export class AccountService {
   }
 
 
-updateTotalBalance(newTotalBalance: number): void {
-  this.totalBalanceSubject.next(newTotalBalance);
-}
 
+  restarBalance(idWallet: string, balanceToSubtract: number): void {
+    const walletArray = this.walletArraySubject.value.slice();
+    let i = 0;
+    while (i < walletArray.length) {
+      if (walletArray[i].id === idWallet) {
+        walletArray[i].balance = Math.max(0, walletArray[i].balance - balanceToSubtract);
+        break;
+      }
+      i++;
+    }
+    this.walletArraySubject.next(walletArray);
+  }
+
+
+  updateTotalBalance(newTotalBalance: number): void {
+    this.totalBalanceSubject.next(newTotalBalance);
+  }
+
+  borrarWallet(id: string): void {
+    const walletArray = this.walletArraySubject.value;
+
+    const nuevaWalletArray = walletArray.filter((Wallet) => Wallet.id !== id);
+
+    this.walletArraySubject.next(nuevaWalletArray);
+  }
+
+  
+  removeDuplicatesFromWalletArray(): void {
+    const walletArray = this.walletArraySubject.value.slice();
+  
+    console.log('Antes de eliminar duplicados:', walletArray);
+
+    // Utilizando un Set para almacenar nombres únicos
+    const uniqueNames = new Set<string>();
+    const uniqueWalletArray = walletArray.filter((wallet: any) => {
+      if (!uniqueNames.has(wallet.name)) {
+        uniqueNames.add(wallet.name);
+        return true;
+      }
+      return false;
+    });
+  
+    console.log('Después de eliminar duplicados:', uniqueWalletArray);
+  
+    this.walletArraySubject.next(uniqueWalletArray);
+  }
 }

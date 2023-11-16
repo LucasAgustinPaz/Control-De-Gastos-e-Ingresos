@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { WalletAPIService } from './wallet-api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NuevaCuentaComponent } from './nueva-cuenta/nueva-cuenta.component';
+import { TransaccionesService } from './transacciones.service';
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { NuevaCuentaComponent } from './nueva-cuenta/nueva-cuenta.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [WalletAPIService],
+  providers: [WalletAPIService, TransaccionesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

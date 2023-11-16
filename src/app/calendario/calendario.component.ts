@@ -29,7 +29,7 @@ export class CalendarioComponent {
     'Mayo', 'Junio', 'Julio', 'Agosto',
     'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
   ];
-  years: number[] = [2021, 2022, 2023]; // Puedes ajustar según tus necesidades
+  years: number[] = [2022, 2023, 2024,2025]; // Puedes ajustar según tus necesidades
 
   selectedYear: number = new Date().getFullYear();
   selectedMonth: number = new Date().getMonth() + 1;

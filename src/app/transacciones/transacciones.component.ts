@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { WalletAPIService } from '../wallet-api.service';
 import { AccountService } from '../accounts.service';
+import { CalendarioService } from '../calendario.service';
+import { TransaccionesService } from '../transacciones.service';
 
 @Component({
   selector: 'app-transacciones',
@@ -24,7 +26,7 @@ export class TransaccionesComponent {
   categoriaGasto: string="";
   cuentaGasto: string="";
 
-  constructor(private walletService: WalletAPIService,  private accountService: AccountService) {}
+  constructor(private walletService: WalletAPIService,  private accountService: AccountService, private calendarioService: CalendarioService,  private transaccionesService: TransaccionesService) {}
 
   ngOnInit(): void {
     this.accountService.walletArray$.subscribe(
@@ -53,8 +55,17 @@ export class TransaccionesComponent {
       cuenta: this.cuentaIngreso
     };
 
+    const ingresoEvent = {
+      title: 'Ingreso en cuenta: ' + ingresoData.cuenta,
+      amount:"$" + ingresoData.monto,
+      date: new Date(),
+      description: ingresoData.descripcion,
+
+    };
     const id = selectedAccount.id;
     this.accountService.sumarBalance(id, ingresoData.monto);
+    this.calendarioService.addEvent(ingresoEvent);
+    this.transaccionesService.agregarTransaccion(ingresoEvent);
   }
 
   realizarGasto(): void {
@@ -71,10 +82,19 @@ export class TransaccionesComponent {
       categoria: this.categoriaGasto,
       cuenta: this.cuentaGasto
     };
-  
+
+    const gastoEvent = {
+      title: 'Gasto en cuenta: ' + gastoData.cuenta,
+      amount: "$" + (gastoData.monto*-1),
+      date: new Date(),
+      description: gastoData.descripcion,
+      categoria: gastoData.categoria,
+    };
     const id = selectedAccount.id;
   
     this.accountService.restarBalance(id,  gastoData.monto);
+    this.calendarioService.addEvent(gastoEvent);
+    this.transaccionesService.agregarTransaccion(gastoEvent); 
   }
 
   onAccountChange() {

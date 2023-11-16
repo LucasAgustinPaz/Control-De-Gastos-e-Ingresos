@@ -69,7 +69,7 @@ isAccountActive(accountName: string): boolean {
 }
 
 
-  getSelectedAccount(): { name: string, balance: number, active: boolean } | undefined {
+  getSelectedAccount(): {id: string, name: string, balance: number, active: boolean } | undefined {
     return this.accounts.find(account => account.name === this.selectedAccount);
   }
 
@@ -81,17 +81,6 @@ isAccountActive(accountName: string): boolean {
     console.log("Plata Total: ", this.balanceTotal);
   }
 
-  confirmarEliminarCuenta(): void {
-    const selectedAccount = this.getSelectedAccount();
-
-    if (selectedAccount) {
-      const confirmacion = confirm(`¿Estás seguro de que deseas eliminar la cuenta ${selectedAccount.name}?`);
-
-      if (confirmacion) {
-        this.eliminarCuenta();
-      }
-    }
-  }
 
   updateTotalBalance(): void {
     this.balanceTotal = this.accounts
@@ -119,20 +108,30 @@ isAccountActive(accountName: string): boolean {
   
 
   eliminarCuenta(): void {
-    // Llama a loadUserWallets para cargar el array observable
+    const selectedAccount = this.getSelectedAccount();
+  
+    if (!selectedAccount) {
+      console.error('No se ha seleccionado una cuenta.');
+      return;
+    }
+    const confirmacion = confirm(`¿Estás seguro de que deseas eliminar la cuenta ${selectedAccount.name}?`);
 
-    this.accountService.loadUserWallets().subscribe(
-      (walletArray: any[]) => {
-        this.accounts = walletArray;
-        // Realiza acciones adicionales si es necesario
-        console.log("hol", this.accounts);
-      },
-      (error) => {
-        console.error('Error al cargar las billeteras del usuario:', error);
-      }
-    );
+  if (confirmacion) {
+    const id = selectedAccount.id;
+    this.accountService.borrarWallet(id);
   }
+    
 }
 
-
-
+cargar(){
+  this.accountService.loadUserWallets().subscribe(
+    (wallets: any[]) => {
+      // Actualiza el arreglo accounts con los datos recibidos
+      this.accounts = wallets;
+    },
+    (error) => {
+      console.error('Error al cargar las cuentas del usuario:', error);
+    }
+  );
+}
+}
