@@ -8,8 +8,8 @@
   <div class="caja-container">
     <app-caja [titulo]="'Cuentas'" [valor]="'$' + balanceTotal" [balance]="'Balance Total'" [totalBalance]="balanceTotal"></app-caja>
   </div>
-  <div class="caja-container">
-    <app-caja2 [titulo]="'Configura tu ingreso aquí'"></app-caja2>
+  <div class="caja-container" (click)="redirigirAComponenteMeta()">
+    <app-caja2 [titulo]="'Establece tu meta aqui'"></app-caja2>
   </div>
 </div>
 <app-disponible-para-gastar></app-disponible-para-gastar>

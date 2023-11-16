@@ -23,6 +23,8 @@ import { WalletAPIService } from './wallet-api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NuevaCuentaComponent } from './nueva-cuenta/nueva-cuenta.component';
 import { TransaccionesService } from './transacciones.service';
+import { LoginOscuroComponent } from './inicio-oscuro/login-oscuro.component';
+import { DppOscuroComponent } from './dpp-oscuro/dpp-oscuro.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { TransaccionesService } from './transacciones.service';
     LoginComponent,
     RegisterComponent,
     NuevaCuentaComponent,
+    LoginOscuroComponent,
+    DppOscuroComponent,
   ],
   imports: [
     BrowserModule,

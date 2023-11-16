@@ -4,11 +4,11 @@ import { AccountService } from '../accounts.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-disponible-para-gastar',
-  templateUrl: './disponible-para-gastar.component.html',
-  styleUrls: ['./disponible-para-gastar.component.css']
+  selector: 'app-dpp-oscuro',
+  templateUrl: './dpp-oscuro.component.html',
+  styleUrls: ['./dpp-oscuro.component.css']
 })
-export class DisponibleParaGastarComponent implements OnInit {
+export class DppOscuroComponent implements OnInit {
   selectedAccount: string = '';
   availableBalance: number = 0;
   accounts: { id: string, name: string, balance: number, currency: string, active: boolean }[] = [];

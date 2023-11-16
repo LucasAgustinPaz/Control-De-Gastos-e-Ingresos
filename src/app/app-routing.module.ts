@@ -9,6 +9,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NuevaCuentaComponent } from './nueva-cuenta/nueva-cuenta.component';
+import { LoginOscuroComponent } from './inicio-oscuro/login-oscuro.component';
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'analisis', component: AnalisisComponent },
   { path: 'transacciones', component: TransaccionesComponent },
   { path: 'nuevaCuenta', component: NuevaCuentaComponent },
+  { path: 'inicioOscuro', component: LoginOscuroComponent },
 ];
 
 @NgModule({

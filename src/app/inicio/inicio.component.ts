@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../accounts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -11,7 +12,7 @@ import { AccountService } from '../accounts.service';
 export class InicioComponent implements OnInit {
   balanceTotal: number = 0;
   accounts: { id: string, name: string, balance: number, currency: string, active: boolean }[] = [];
-  constructor(private accountService: AccountService) { }
+  constructor(private router: Router, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.accountService.walletArray$.subscribe(
@@ -31,6 +32,11 @@ export class InicioComponent implements OnInit {
 
     console.log("Plata Total: ", this.balanceTotal);
     this.accountService.removeDuplicatesFromWalletArray();
+  }
+
+  redirigirAComponenteMeta() {
+    // Aquí defines la ruta a la que quieres redirigir al usuario cuando haga clic en el componente app-caja2
+    this.router.navigate(['/ruta-de-destino']);
   }
 }
 

@@ -1,0 +1,20 @@
+<!-- login.component.html -->
+
+<div class="login-wrapper">
+    <div class="containerTitle">
+        <app-titulo-general [titulo]="'Inicio'"></app-titulo-general>
+    </div>
+    
+    <div class="container">
+        <div class="caja-container">
+            <app-caja [titulo]="'Cuentas'" [valor]="'$' + balanceTotal" [balance]="'Balance Total'"
+                [totalBalance]="balanceTotal"></app-caja>
+        </div>
+        <div class="caja-container">
+            <app-caja2 [titulo]="'Configura tu ingreso aquí'"></app-caja2>
+        </div>
+    </div>
+    <app-dpp-oscuro></app-dpp-oscuro>
+    
+    <app-barra-inferior-nav></app-barra-inferior-nav>
+</div>
