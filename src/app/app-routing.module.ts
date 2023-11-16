@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NuevaCuentaComponent } from './nueva-cuenta/nueva-cuenta.component';
 import { LoginOscuroComponent } from './inicio-oscuro/login-oscuro.component';
+import { MetaFinancieraComponent } from './meta-financiera/meta-financiera.component';
 
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'transacciones', component: TransaccionesComponent },
   { path: 'nuevaCuenta', component: NuevaCuentaComponent },
   { path: 'inicioOscuro', component: LoginOscuroComponent },
+  { path: 'metaFinanciera', component: MetaFinancieraComponent },
 ];
 
 @NgModule({

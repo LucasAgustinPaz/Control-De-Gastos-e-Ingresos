@@ -1,0 +1,22 @@
+<!-- meta-financiera.component.html -->
+
+<app-barra-inferior-nav></app-barra-inferior-nav>
+
+<div class="containerTitle">
+    <app-titulo-general [titulo]="'Meta Financiera'"></app-titulo-general>
+</div>
+
+<div *ngIf="mostrarFormulario" class="formulario-container">
+    <form (ngSubmit)="guardarMeta()" #metaForm="ngForm">
+        <label for="meta">Ingresa tu meta financiera:</label>
+        <input type="text" id="meta" name="meta" [(ngModel)]="meta" required>
+
+        <button type="submit">Guardar</button>
+    </form>
+</div>
+
+<div class="meta-objetivo-container" *ngIf="!mostrarFormulario">
+  <h2>Objetivo:</h2>
+  <p>{{ meta }}</p>
+  <button (click)="mostrarFormulario = true">Actualizar</button>
+</div>

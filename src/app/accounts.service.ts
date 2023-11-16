@@ -27,6 +27,15 @@ export class AccountService {
   constructor(private walletService: WalletAPIService) { }
   private totalBalanceSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   totalBalance$: Observable<number> = this.totalBalanceSubject.asObservable();
+  private meta: string = '';
+
+  guardarMeta(nuevaMeta: string) {
+    this.meta = nuevaMeta;
+  }
+
+  obtenerMeta(): string {
+    return this.meta;
+  }
 
 
   crearNuevaCuenta(walletData: any): Observable<void> {

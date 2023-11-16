@@ -1,0 +1,23 @@
+<!-- app-barra-navegacion.component.html -->
+<div class="barra-navegacion">
+    <a routerLink="/inicio">Inicio</a>
+    <a routerLink="/calendario">Calendario</a>
+    <a routerLink="/analisis">Análisis</a>
+    <a routerLink="/transacciones">Transacciones</a>
+    
+  
+    <!-- Menú desplegable integrado -->
+    <div class="menu-desplegable" (mouseenter)="mostrarMenu = true" (mouseleave)="mostrarMenu = false">
+      <div class="dropdown">
+        <button class="dropbtn">
+          Menú
+        </button>
+        <div class="dropdown-content" [ngClass]="{'mostrar': mostrarMenu}">
+          <a routerLink="/inicio">Modo Claro</a>
+          <a routerLink="/">Desconectarse</a>
+          <!-- Agrega más opciones según sea necesario -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

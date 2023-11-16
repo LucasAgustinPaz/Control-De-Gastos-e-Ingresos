@@ -25,6 +25,8 @@ import { NuevaCuentaComponent } from './nueva-cuenta/nueva-cuenta.component';
 import { TransaccionesService } from './transacciones.service';
 import { LoginOscuroComponent } from './inicio-oscuro/login-oscuro.component';
 import { DppOscuroComponent } from './dpp-oscuro/dpp-oscuro.component';
+import { MetaFinancieraComponent } from './meta-financiera/meta-financiera.component';
+import { BarraNavOScComponent } from './barra-nav-osc/barra-nav-osc.component';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { DppOscuroComponent } from './dpp-oscuro/dpp-oscuro.component';
     NuevaCuentaComponent,
     LoginOscuroComponent,
     DppOscuroComponent,
+    MetaFinancieraComponent,
+    BarraNavOScComponent,
   ],
   imports: [
     BrowserModule,
