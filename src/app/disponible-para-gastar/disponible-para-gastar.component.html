@@ -8,7 +8,7 @@
     <button (click)="toggleAccount()" [ngClass]="{'active': isAccountActive(selectedAccount)}" class="toggle-button">
       {{ isAccountActive(selectedAccount) ? '✔' : '✘' }}
     </button>
-
+    <button (click)="eliminarCuenta()" >Eliminar Cuenta</button>
     <button (click)="navigateToNewAccountForm()">Crear Nueva Cuenta</button>
 
   </div>
@@ -20,4 +20,10 @@
     <p>Balance: {{ getSelectedAccount()?.balance | currency }}</p>
     <!-- Agregar cualquier otra información que desees mostrar -->
   </div>
+</div>
+
+<div *ngIf="selectedAccount">
+  <h4>Detalles de la cuenta {{ selectedAccount }}</h4>
+  <p>Nombre: {{ getSelectedAccount()?.name }}</p>
+  <p>Balance: {{ getSelectedAccount()?.balance | currency }}</p>
 </div>

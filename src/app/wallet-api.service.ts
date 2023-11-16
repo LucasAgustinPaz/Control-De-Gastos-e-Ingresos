@@ -74,18 +74,5 @@ export class WalletAPIService {
 
     return this.http.patch(url, data, { headers: this.headers, params });
   }
-  // Nuevo método para sumar balance
-  sumarBalance(walletId: string, balanceData: any): Observable<any> {
-    const url = `${this.apiUrl}/${walletId}/plus-balance`;
-
-    return this.http.patch(url, balanceData, { headers: this.headers });
-  }
-
-  // Nuevo método para restar balance
-  restarBalance(walletId: string, balanceData: any): Observable<any> {
-    const url = `${this.apiUrl}/${walletId}/minus-balance`;
-
-    return this.http.patch(url, balanceData, { headers: this.headers });
-  }
 
 }

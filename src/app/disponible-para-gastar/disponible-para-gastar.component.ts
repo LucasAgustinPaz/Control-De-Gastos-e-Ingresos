@@ -11,16 +11,35 @@ import { Router } from '@angular/router';
 export class DisponibleParaGastarComponent implements OnInit {
   selectedAccount: string = '';
   availableBalance: number = 0;
-  accounts: { name: string, balance: number, currency: string, active: boolean }[] = [];
+  accounts: {id: string,  name: string, balance: number, currency: string, active: boolean }[] = [];
   totalBalance: number = 0; // Agregamos una propiedad para el total
-
+  wallets: { id: string, name: string, balance: number, currency: string, active: boolean }[] = [];
   constructor(private router: Router, private walletService: WalletAPIService, private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.getAccounts();
+    this.accountService.walletArray$.subscribe(
+      (walletArray: any[]) => {
+        this.accounts = walletArray;
+        console.log("cuentas llegaron dpg", this.accounts);
+        // Realiza acciones adicionales si es necesario
+      },
+      (error) => {
+        console.error('Error al recibir actualizaciones del array de billeteras:', error);
+      }
+    );
   }
 
   onAccountChange() {
+    this.accountService.walletArray$.subscribe(
+      (walletArray: any[]) => {
+        this.accounts = walletArray;
+        console.log("cuentas llegaron dpg", this.accounts);
+        // Realiza acciones adicionales si es necesario
+      },
+      (error) => {
+        console.error('Error al recibir actualizaciones del array de billeteras:', error);
+      }
+    );
     const selectedAccount = this.getSelectedAccount();
     if (selectedAccount) {
       this.availableBalance = selectedAccount.balance;
@@ -36,7 +55,7 @@ export class DisponibleParaGastarComponent implements OnInit {
       const selectedAccount = this.getSelectedAccount();
       if (selectedAccount) {
         selectedAccount.active = !selectedAccount.active;
-        this.accountService.updateAccountBalance("6492f433139a79cae6a3149e", selectedAccount.name, selectedAccount.balance);
+       // this.accountService.updateAccountBalance("6492f433139a79cae6a3149e", selectedAccount.name, selectedAccount.balance);
         this.accountService.notifyAccountStatusChanged();
         this.updateTotalBalance();
       }
@@ -56,6 +75,7 @@ export class DisponibleParaGastarComponent implements OnInit {
         (response: any[]) => {
           console.log("Respuesta de get user wallets: ", response);
           this.accounts = response.map((wallet: any) => ({
+            id: wallet._id,
             name: wallet.name,
             balance: wallet.balance,
             currency: wallet.currency,
@@ -103,4 +123,34 @@ export class DisponibleParaGastarComponent implements OnInit {
   updateTotalBalance(): void {
     this.totalBalance = this.accounts.reduce((sum, account) => sum + account.balance, 0);
   }
+
+  confirmarEliminarCuenta(): void {
+    const selectedAccount = this.getSelectedAccount();
+
+    if (selectedAccount) {
+      const confirmacion = confirm(`¿Estás seguro de que deseas eliminar la cuenta ${selectedAccount.name}?`);
+
+      if (confirmacion) {
+        this.eliminarCuenta();
+      }
+    }
+  }
+
+  eliminarCuenta(): void {
+        // Llama a loadUserWallets para cargar el array observable
+        
+        this.accountService.loadUserWallets().subscribe(
+          (walletArray: any[]) => {
+            this.accounts = walletArray;
+            // Realiza acciones adicionales si es necesario
+            console.log("hol", this.accounts);
+          },
+          (error) => {
+            console.error('Error al cargar las billeteras del usuario:', error);
+          }
+        );
+    }
 }
+    
+
+

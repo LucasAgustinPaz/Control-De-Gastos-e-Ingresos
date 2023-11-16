@@ -7,15 +7,25 @@ import { throwError } from 'rxjs';
 import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
+interface Wallet {
+  id: string;
+  name: string;
+  balance: number;
+  currency: string;
+  active: boolean;
+}
 @Injectable({
   providedIn: 'root'
 })
+
 export class AccountService {
   private userAccounts: { [userId: string]: { name: string, balance: number, active: boolean }[] } = {};
   accountStatusChanged = new BehaviorSubject<void>(undefined);
   accountStatusChanged$: Observable<void> = this.accountStatusChanged.asObservable();
-
+  private walletArraySubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  public walletArray$: Observable<any[]> = this.walletArraySubject.asObservable();
   constructor(private walletService: WalletAPIService) { }
+
 
   crearNuevaCuenta(userId: string, cuentaNombre: string, moneda: string, balance: number): Observable<void> {
     const cuentaExistente = this.userAccounts[userId]?.find(account => account.name === cuentaNombre);
@@ -47,37 +57,6 @@ export class AccountService {
     );
   }
 
-  updateAccountBalance(userId: string, accountName: string, newBalance: number): void {
-    const account = this.findAccount(userId, accountName);
-
-    if (account) {
-      account.balance = newBalance;
-      this.updateWalletBalance(userId, accountName, newBalance);
-      this.notifyAccountStatusChanged();
-    }
-  }
-
-  private updateWalletBalance(userId: string, accountName: string, newBalance: number): void {
-    this.findWallet(userId, accountName).subscribe(
-      (wallet) => {
-        if (wallet) {
-          const { walletId, token } = wallet;
-          const value = newBalance.toString();
-
-          this.walletService.updateWallet(walletId, token, value, {}).subscribe(
-            (response) => console.log('Saldo de billetera actualizado con éxito:', response),
-            (error) => console.error('Error al actualizar saldo de billetera:', error)
-          );
-        } else {
-          console.error('Billetera no encontrada');
-        }
-      },
-      (error) => {
-        console.error('Error al obtener billeteras del usuario:', error);
-      }
-    );
-  }
-
   toggleAccountStatus(userId: string, accountName: string): void {
     const account = this.findAccount(userId, accountName);
 
@@ -101,23 +80,47 @@ export class AccountService {
     return userAccounts?.find(account => account.name === accountName);
   }
 
-  private findWallet(userId: string, walletName: string): Observable<{ walletId: string, token: string } | undefined> {
-    return this.walletService.getUserWallets(userId).pipe(
-      map((wallets: any[]) => {
-        const wallet = wallets.find((w: any) => w.walletName === walletName);
-        if (wallet) {
-          const { walletId, token } = wallet;
-          console.log('Billetera encontrada:', wallet);
-          return { walletId, token };
-        } else {
-          console.log('Billetera no encontrada');
-          return undefined;
-        }
-      }),
-      catchError((error) => {
-        console.error('Error al obtener billeteras del usuario:', error);
-        return of(undefined);
+  loadUserWallets(): Observable<any[]> {
+    return this.walletService.getUserWallets("6492f433139a79cae6a3149e").pipe(
+      map((response: any[]) => {
+        const transformedWalletArray = response.map((wallet: any) => ({
+          id: wallet._id,
+          name: wallet.name,
+          balance: wallet.balance,
+          currency: wallet.currency,
+          active: true
+        }));
+
+        this.walletArraySubject.next(transformedWalletArray);
+        return transformedWalletArray;
       })
     );
   }
+
+  sumarBalance(idWallet: string, balanceToAdd: number): void {
+    const walletArray = this.walletArraySubject.value.slice(); 
+    let i = 0;
+    while (i < walletArray.length) {
+      if (walletArray[i].id === idWallet) {
+        walletArray[i].balance += balanceToAdd;
+        break;
+      }
+      i++;
+    }
+    this.walletArraySubject.next(walletArray);
+  }
+
+  restarBalance(idWallet: string, balanceToSubtract: number): void {
+    const walletArray = this.walletArraySubject.value.slice(); 
+    let i = 0;
+    while (i < walletArray.length) {
+      if (walletArray[i].id === idWallet) {
+        walletArray[i].balance = Math.max(0, walletArray[i].balance - balanceToSubtract);
+        break; 
+      }
+      i++;
+    }
+    this.walletArraySubject.next(walletArray);
+  }
 }
+

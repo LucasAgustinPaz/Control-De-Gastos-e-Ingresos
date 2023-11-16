@@ -10,15 +10,22 @@ import { AccountService } from '../accounts.service';
 })
 export class InicioComponent implements OnInit {
   totalBalance: number = 0;
-
+  accounts: { id: string,name: string, balance: number, currency: string, active: boolean }[] = [];
   constructor(private accountService: AccountService) {}
 
-  ngOnInit() {
-    this.calculateTotalBalance();
-    this.accountService.accountStatusChanged$.subscribe(() => {
-      this.calculateTotalBalance();
-    });
+  ngOnInit(): void {
+    this.accountService.walletArray$.subscribe(
+      (walletArray: any[]) => {
+        this.accounts = walletArray;
+        console.log("cuentas llegaron", this.accounts);
+        // Realiza acciones adicionales si es necesario
+      },
+      (error) => {
+        console.error('Error al recibir actualizaciones del array de billeteras:', error);
+      }
+    );
   }
+  
 
   calculateTotalBalance() {
     const userId = localStorage.getItem('userId');

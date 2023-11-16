@@ -18,7 +18,10 @@
       <input type="text" id="descripcion" [(ngModel)]="descripcionIngreso" placeholder="Ingrese la descripción">
   
       <label for="cuentaIngreso">Cuenta:</label>
-      <input type="text" id="cuentaIngreso" [(ngModel)]="cuentaIngreso" placeholder="Ingrese la cuenta">
+      <select [(ngModel)]="selectedAccount" (change)="onAccountChange()">
+        <option value="" disabled selected>Selecciona una cuenta</option>
+        <option *ngFor="let account of accounts" [value]="account.name">{{ account.name }}</option>
+      </select>
   
       <button (click)="realizarIngreso()">Realizar Ingreso</button>
     </div>
@@ -43,8 +46,10 @@
       </select>
   
       <label for="cuentaGasto">Cuenta:</label>
-      <input type="text" id="cuentaGasto" [(ngModel)]="cuentaGasto" placeholder="Ingrese la cuenta">
-  
+      <select [(ngModel)]="selectedAccount" (change)="onAccountChange()">
+        <option value="" disabled selected>Selecciona una cuenta</option>
+        <option *ngFor="let account of accounts" [value]="account.name">{{ account.name }}</option>
+      </select>
       <button (click)="realizarGasto()">Realizar Gasto</button>
     </div>
   </div>

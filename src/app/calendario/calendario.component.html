@@ -1,8 +1,8 @@
 <app-barra-inferior-nav></app-barra-inferior-nav>
 <div class="container">
+  <app-titulo-general [titulo]="'Calendario'"></app-titulo-general>
   <div class="row">
     <div class="col">
-      <h3>Calendario</h3>
     </div>
   </div>
 
@@ -42,13 +42,13 @@
 
       <!-- Nueva sección para mostrar detalles -->
       <div *ngIf="isDetailsVisible">
-        <h4>Detalles del día</h4>
+        <h2>Detalles del día</h2>
         <ul>
           <li *ngFor="let event of selectedDayEvents">
             {{ event.type === 'income' ? 'Ingreso' : 'Gasto' }}: {{ event.amount | currency }} - {{ event.description }}
           </li>
         </ul>
-        <button (click)="closeDetails()">Cerrar</button>
+        <button id = "cerrar" (click)="closeDetails()">Cerrar</button>
       </div>
     </div>
   </div>

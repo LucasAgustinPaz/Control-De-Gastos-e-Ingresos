@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WalletAPIService } from '../wallet-api.service';
+import { AccountService } from '../accounts.service';
 
 @Component({
   selector: 'app-transacciones',
@@ -8,6 +9,10 @@ import { WalletAPIService } from '../wallet-api.service';
 })
 
 export class TransaccionesComponent {
+  selectedAccount: string = '';
+  availableBalance: number = 0;
+  accounts: { id: string,name: string, balance: number, currency: string, active: boolean }[] = [];
+  totalBalance: number = 0; // Agregamos una propiedad para el total
   tipoTransaccion: string = 'INGRESO';
 
   montoIngreso: number=0;
@@ -19,48 +24,67 @@ export class TransaccionesComponent {
   categoriaGasto: string="";
   cuentaGasto: string="";
 
-  constructor(private walletService: WalletAPIService) {}
+  constructor(private walletService: WalletAPIService,  private accountService: AccountService) {}
 
-  onTipoTransaccionChange(tipo: string): void {
-    this.tipoTransaccion = tipo;
+  ngOnInit(): void {
+    this.accountService.walletArray$.subscribe(
+      (walletArray: any[]) => {
+        this.accounts = walletArray;
+        console.log("cuentas llegaron transacciones", this.accounts);
+        // Realiza acciones adicionales si es necesario
+      },
+      (error) => {
+        console.error('Error al recibir actualizaciones del array de billeteras:', error);
+      }
+    );
   }
 
   realizarIngreso(): void {
+    const selectedAccount = this.getSelectedAccount();
+  
+    if (!selectedAccount) {
+      console.error('No se ha seleccionado una cuenta.');
+      return;
+    }
+
     const ingresoData = {
       monto: this.montoIngreso,
       descripcion: this.descripcionIngreso,
       cuenta: this.cuentaIngreso
     };
 
-    this.walletService.sumarBalance("idWallet", ingresoData).subscribe(
-      (respuesta) => {
-        console.log('Balance sumado con éxito', respuesta);
-        // Realiza acciones adicionales si es necesario
-      },
-      (error) => {
-        console.error('Error al sumar el balance', error);
-        // Maneja el error de acuerdo a tus necesidades
-      }
-    );
+    const id = selectedAccount.id;
+    this.accountService.sumarBalance(id, ingresoData.monto);
   }
 
   realizarGasto(): void {
+    const selectedAccount = this.getSelectedAccount();
+  
+    if (!selectedAccount) {
+      console.error('No se ha seleccionado una cuenta.');
+      return;
+    }
+  
     const gastoData = {
       monto: this.montoGasto,
       descripcion: this.descripcionGasto,
       categoria: this.categoriaGasto,
       cuenta: this.cuentaGasto
     };
+  
+    const id = selectedAccount.id;
+  
+    this.accountService.restarBalance(id,  gastoData.monto);
+  }
 
-    this.walletService.restarBalance("idWallet", gastoData).subscribe(
-      (respuesta) => {
-        console.log('Balance restado con éxito', respuesta);
-        // Realiza acciones adicionales si es necesario
-      },
-      (error) => {
-        console.error('Error al restar el balance', error);
-        // Maneja el error de acuerdo a tus necesidades
-      }
-    );
+  onAccountChange() {
+    const selectedAccount = this.getSelectedAccount();
+    if (selectedAccount) {
+      this.availableBalance = selectedAccount.balance;
+    }
+  }
+  
+  getSelectedAccount(): { id:string, name: string, balance: number, active: boolean } | undefined {
+    return this.accounts.find(account => account.name === this.selectedAccount);
   }
 }
