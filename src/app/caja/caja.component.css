@@ -1,20 +1,48 @@
+/* caja.component.css */
+
 .caja {
-  background: linear-gradient(to bottom, #c13ddb, #d197e3);
+  position: relative;
+  overflow: hidden;
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
   font-family: 'Arial', sans-serif;
 }
 
-.titulo{
+.titulo {
   font-size: 20px;
   color: #ffffff;
 }
+
 .valor {
   font-size: 25px;
   color: #ffffff;
 }
-.balance{
+
+.balance {
   font-size: 15px;
   color: #ffffff;
+}
+
+/* Animación de fondo de olas */
+.caja::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to right, #8a2be2, #ff8c00);
+  z-index: -1;
+  animation: waveAnimation 8s linear infinite;
+  transition: opacity 0.5s ease; /* Agregamos una transición de opacidad para suavizar el cambio de color */
+}
+
+@keyframes waveAnimation {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
 }

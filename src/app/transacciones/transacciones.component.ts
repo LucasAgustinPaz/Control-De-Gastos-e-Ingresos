@@ -57,7 +57,7 @@ export class TransaccionesComponent {
 
     const ingresoEvent = {
       title: 'Ingreso en cuenta: ' + ingresoData.cuenta,
-      amount:"$" + ingresoData.monto,
+      amount: ingresoData.monto,
       date: new Date(),
       description: ingresoData.descripcion,
 
@@ -85,7 +85,7 @@ export class TransaccionesComponent {
 
     const gastoEvent = {
       title: 'Gasto en cuenta: ' + gastoData.cuenta,
-      amount: "$" + (gastoData.monto*-1),
+      amount: (gastoData.monto*-1),
       date: new Date(),
       description: gastoData.descripcion,
       categoria: gastoData.categoria,

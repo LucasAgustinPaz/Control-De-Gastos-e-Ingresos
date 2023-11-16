@@ -1,18 +1,78 @@
+/* Estilos generales de la barra de navegación */
 .barra-navegacion {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .barra-navegacion a {
-    text-decoration: none;
-    color: white;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center; /* Alinea los elementos verticalmente */
+  padding: 5px; /* Reduce el espacio interno */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Estilos de los enlaces en la barra de navegación */
+.barra-navegacion a {
+  text-decoration: none;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px; /* Reduce el tamaño de la fuente */
+  transition: background-color 0.3s; /* Transición suave al pasar el mouse */
+}
+
+.barra-navegacion a:hover {
+  background-color: #555; /* Cambia el color al pasar el mouse */
+}
+
+/* Estilos del menú desplegable */
+.menu-desplegable {
+  display: inline-block;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 14px; /* Reduce el tamaño de la fuente */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Transición suave al pasar el mouse */
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  margin-top: 5px; /* Reduce el espacio superior */
+  opacity: 0; /* Inicialmente invisible */
+  visibility: hidden; /* Inicialmente oculto */
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Agregamos transiciones */
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 8px 12px; /* Ajusta el espacio interno */
+  display: block;
+  text-decoration: none;
+  transition: background-color 0.3s; /* Transición suave al pasar el mouse */
+}
+
+/* Muestra el menú desplegable cuando el mouse pasa sobre el botón */
+.dropdown:hover .dropdown-content {
+  opacity: 1; /* Hace visible */
+  visibility: visible; /* Hace visible */
+}
+
+/* Ajustes para mostrar las opciones al pasar el mouse sobre ellas */
+.dropdown-content a:hover {
+  background-color: #555; /* Cambia el color al pasar el mouse */
+  color: white; /* Cambia el color del texto al pasar el mouse */
+}

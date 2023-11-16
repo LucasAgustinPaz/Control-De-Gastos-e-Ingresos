@@ -1,17 +1,40 @@
+/* caja2.component.css */
+
 /* Estilos específicos para la caja 2 */
 .caja {
-  background: #7ec0ee;
-    border: 1px solid #ddd;
-    padding: 55px;
-    text-align: center;
-    font-family: 'Arial', sans-serif;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  padding: 50px; /* Ajusta el padding para que coincida con el de la primera caja */
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Estilo específico para el título de la caja 2 */
+h2 {
+  font-size: 24px;
+  color: #ffffff; /* Color de texto */
+}
+
+/* Animación de fondo de olas para la caja 2 */
+.caja::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to right, #87ceeb, #ff8c00); /* Celeste a naranja */
+  z-index: -1;
+  animation: waveAnimation 8s linear infinite;
+  transition: opacity 0.5s ease; /* Transición de opacidad para suavizar el cambio de color */
+}
+
+@keyframes waveAnimation {
+  0%, 100% {
+    transform: translateX(0);
   }
-  
-  /* Estilo específico para el título de la caja 2 */
-  h2 {
-    font-size: 24px;
-    color: #ffffff;
+  50% {
+    transform: translateX(-50%);
   }
-  
-  /* Otros estilos específicos de la caja 2, si es necesario */
-  
+}

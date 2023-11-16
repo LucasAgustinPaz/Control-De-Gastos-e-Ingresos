@@ -14,9 +14,9 @@ import { NuevaCuentaComponent } from './nueva-cuenta/nueva-cuenta.component';
 
 
 const routes: Routes = [
-  { path: 'asd', component: LoginComponent }, // volver a borrar
+  { path: '', component: LoginComponent }, // volver a borrar
   { path: 'registrarse', component: RegisterComponent },
-  { path: '', component: InicioComponent },  // volver a poner inicio
+  { path: 'inicio', component: InicioComponent },  // volver a poner inicio
   { path: 'calendario', component: CalendarioComponent },
   { path: 'analisis', component: AnalisisComponent },
   { path: 'transacciones', component: TransaccionesComponent },

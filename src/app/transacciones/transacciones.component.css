@@ -1,33 +1,77 @@
-.containerTitle{
-  padding: 10px;
+/* Estilos del título general */
+.containerTitle {
+  padding: 20px;
+  text-align: left;
+  color: black;
+  border-radius: 8px;
 }
 
+/* Cambiaremos el estilo del título y su fondo */
+.containerTitle h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333; /* Color de texto */
+}
+
+/* Estilos del formulario de transacciones */
 .transacciones-form {
-  max-width: 400px;
-  margin: auto;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
+/* Estilos para etiquetas */
 label {
   display: block;
   margin-top: 10px;
+  font-weight: bold;
 }
 
-input, select {
-  width: 100%;
-  padding: 8px;
+/* Estilos para input y select */
+input,
+select {
+  width: calc(100% - 16px);
+  padding: 10px;
   margin-top: 5px;
   margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
+/* Estilos para botones */
 button {
+  width: 100%;
+  padding: 12px;
   background-color: #4CAF50;
   color: white;
-  padding: 10px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #45a049;
+}
+
+/* Estilos específicos para los botones de ingreso y gasto */
+.button-ingreso {
+  background-color: #27ae60;
+}
+
+.button-gasto {
+  background-color: #e74c3c;
+}
+
+.button-ingreso:hover {
+  background-color: #219653;
+}
+
+.button-gasto:hover {
+  background-color: #c0392b;
 }

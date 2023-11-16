@@ -10,10 +10,10 @@ import { AccountService } from '../accounts.service';
 })
 export class InicioComponent implements OnInit {
   balanceTotal: number = 0;
-  accounts: { id: string,name: string, balance: number, currency: string, active: boolean }[] = [];
-  constructor(private accountService: AccountService) {}
+  accounts: { id: string, name: string, balance: number, currency: string, active: boolean }[] = [];
+  constructor(private accountService: AccountService) { }
 
-/*   ngOnInit(): void {
+  ngOnInit(): void {
     this.accountService.walletArray$.subscribe(
       (walletArray: any[]) => {
         this.accounts = walletArray;
@@ -32,9 +32,9 @@ export class InicioComponent implements OnInit {
     console.log("Plata Total: ", this.balanceTotal);
     this.accountService.removeDuplicatesFromWalletArray();
   }
-} */
+}
 
-ngOnInit(): void {
+/*ngOnInit(): void {
   this.accountService.walletArray$.subscribe(
     async (walletArray: any[]) => {
       this.accounts = walletArray;
@@ -53,12 +53,11 @@ ngOnInit(): void {
     }
   );
 
-  this.accountService.totalBalance$.subscribe((totalBalance: number) => {
-    this.balanceTotal = totalBalance;
-  });
+this.accountService.totalBalance$.subscribe((totalBalance: number) => {
+  this.balanceTotal = totalBalance;
+});
 }
 
-private delay(ms: number): Promise<void> {
+private delay(ms: number): Promise < void> {
   return new Promise(resolve => setTimeout(resolve, ms));
-}
-}
+}*/

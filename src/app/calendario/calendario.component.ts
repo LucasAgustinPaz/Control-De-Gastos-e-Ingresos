@@ -33,6 +33,10 @@ export class CalendarioComponent {
 
   selectedYear: number = new Date().getFullYear();
   selectedMonth: number = new Date().getMonth() + 1;
+
+  transacciones: any[] = [];
+  ingresos: any[] = [];
+  gastos: any[] = [];
   
   // Nueva propiedad para gestionar la visibilidad de los detalles
   isDetailsVisible: boolean = false;
@@ -74,6 +78,11 @@ export class CalendarioComponent {
     this.selectedDayEvents = [];
     this.selectedDay = null;
   }
+
+  private separarTransacciones(): void {
+    this.ingresos = this.transacciones.filter((transaccion) => transaccion.amount > 0);
+    this.gastos = this.transacciones.filter((transaccion) => transaccion.amount < 0);
+  }
   
   onDayClick(day: CalendarDay): void {
     const selectedDate = new Date(day.date.getFullYear(), day.date.getMonth(), day.date.getDate());
@@ -83,6 +92,8 @@ export class CalendarioComponent {
     this.selectedDay = { date: selectedDate, isCurrentMonth: true, isSelected: true };
     this.isDetailsVisible = true;
     this.selectedDayEvents = events;
+
+    this.separarTransacciones();
   }
 }
 

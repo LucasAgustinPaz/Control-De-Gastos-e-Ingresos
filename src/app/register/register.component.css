@@ -1,75 +1,77 @@
+/* registro.component.css */
+
+:host {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .registro-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #2980b9, #2c3e50);
-  }
-  
+  max-width: 400px;
+  width: 100%;
+}
+
+.registro-box {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  margin: 0 auto;
+}
+
+.registro-title {
+  text-align: center;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  color: #555;
+}
+
+input {
+  width: 300px;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-registro {
+  padding: 12px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-registro:hover {
+  background-color: #45a049;
+}
+
+.btn-cancel {
+  padding: 12px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 150px;
+}
+
+.btn-cancel:hover {
+  background-color: #2980b9;
+}
+
+@media only screen and (max-width: 600px) {
   .registro-box {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
+      padding: 20px;
   }
-  
-  .registro-title {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .form-group {
-    text-align: left;
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 97%;
-    max-width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .btn-registro {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .btn-registro:hover {
-    background-color: #2980b9;
-  }
-  
-  .btn-cancel {
-    margin-top: 10px;
-    margin-left: 10px;
-  }
-  
-  .btn-cancel a {
-    text-decoration: none;
-    color: #3498db;
-  }
-  
+}

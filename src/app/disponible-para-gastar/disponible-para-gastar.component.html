@@ -5,12 +5,17 @@
       <option value="" disabled selected>Selecciona una cuenta</option>
       <option *ngFor="let account of accounts" [value]="account.name">{{ account.name }}</option>
     </select>
-    <button (click)="toggleAccount(selectedAccount)" [ngClass]="{'active': isAccountActive(selectedAccount)}" class="toggle-button">
+    <button (click)="toggleAccount(selectedAccount)" [ngClass]="{'active': isAccountActive(selectedAccount)}"
+      class="toggle-button">
       {{ isAccountActive(selectedAccount) ? '✔' : '✘' }}
-  </button>
-    <button (click)="eliminarCuenta()" >Eliminar Cuenta</button>
-    <button (click)="navigateToNewAccountForm()">Crear Nueva Cuenta</button>
-    <button (click)="cargar()">Cargar APi</button>
+    </button>
+    <br>
+    <button (click)="navigateToNewAccountForm()" class="mi-boton">Crear Nueva Cuenta</button>
+    <br>
+    <button (click)="eliminarCuenta()" class="mi-boton">Eliminar Cuenta</button>
+    <br>
+    <button (click)="cargar()" class="mi-boton">Cargar API</button>
+
 
   </div>
 
@@ -21,10 +26,4 @@
     <p>Balance: {{ getSelectedAccount()?.balance | currency }}</p>
     <!-- Agregar cualquier otra información que desees mostrar -->
   </div>
-</div>
-
-<div *ngIf="selectedAccount">
-  <h4>Detalles de la cuenta {{ selectedAccount }}</h4>
-  <p>Nombre: {{ getSelectedAccount()?.name }}</p>
-  <p>Balance: {{ getSelectedAccount()?.balance | currency }}</p>
 </div>
