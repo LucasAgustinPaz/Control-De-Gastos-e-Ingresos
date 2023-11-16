@@ -1,47 +1,72 @@
 <app-barra-inferior-nav></app-barra-inferior-nav>
 <div class="containerTitle">
-    <app-titulo-general [titulo]="'Analisis'"></app-titulo-general>
+  <app-titulo-general [titulo]="'Análisis'"></app-titulo-general>
 </div>
-<div class="table-container">
+
+<div class="chart-container">
+  <!-- Gráfico de ingresos -->
+  <div class="chart-box">
+    <canvas baseChart
+            [datasets]="ingresosData"
+            [labels]="ingresosLabels"
+            [type]="'bar'"
+            [options]="{ responsive: true }">
+    </canvas>
+  </div>
+
+  <!-- Tabla de ingresos -->
+  <div class="table-box">
     <h2>Ingresos</h2>
     <table class="ingresos-table">
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Cuenta</th>
-      <th>Monto</th>
-      <th>Descripción</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let ingreso of ingresos">
-      <td>{{ ingreso.date | date: 'yyyy-MM-dd HH:mm' }}</td>
-      <td>{{ ingreso.title }}</td>
-      <td>{{ ingreso.amount }}</td>
-      <td>{{ ingreso.description }}</td>
-    </tr>
-  </tbody>
-</table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Cuenta</th>
+          <th>Monto</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ingreso of ingresos">
+          <td>{{ ingreso.date | date: 'yyyy-MM-dd HH:mm' }}</td>
+          <td>{{ ingreso.title }}</td>
+          <td>{{ ingreso.amount }}</td>
+          <td>{{ ingreso.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<!-- Gastos -->
-<div class="table-box">
- <h2>Gastos</h2>
-<table class="gastos-table">
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Cuenta</th>
-      <th>Monto</th>
-      <th>Descripción</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let gasto of gastos">
-      <td>{{ gasto.date | date: 'yyyy-MM-dd HH:mm' }}</td>
-      <td>{{ gasto.title }}</td>
-      <td>{{ gasto.amount }}</td>
-      <td>{{ gasto.description }}</td>
-    </tr>
-  </tbody>
-</table>
+  <!-- Gráfico de gastos -->
+  <div class="chart-box">
+    <canvas baseChart
+            [datasets]="gastosData"
+            [labels]="gastosLabels"
+            [type]="'bar'"
+            [options]="{ responsive: true }">
+    </canvas>
+  </div>
+
+  <!-- Tabla de gastos -->
+  <div class="table-box">
+    <h2>Gastos</h2>
+    <table class="gastos-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Cuenta</th>
+          <th>Monto</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gasto of gastos">
+          <td>{{ gasto.date | date: 'yyyy-MM-dd HH:mm' }}</td>
+          <td>{{ gasto.title }}</td>
+          <td>{{ gasto.amount }}</td>
+          <td>{{ gasto.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -48,3 +48,44 @@ th {
 tr:hover {
   background-color: #f5f5f5;
 }
+/* Estilos para los contenedores de gráficos y tablas */
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.chart-box, .table-box {
+  width: 45%; /* Ajusta el ancho según sea necesario */
+  margin-bottom: 20px;
+}
+
+/* Estilos para las tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Estilos adicionales según sea necesario */
+.ingresos-table, .gastos-table {
+  /* ... */
+}
+
+/* Estilos para los gráficos */
+canvas {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+}

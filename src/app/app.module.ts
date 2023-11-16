@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CalendarModule } from 'angular-calendar';
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +44,7 @@ import { TransaccionesService } from './transacciones.service';
   ],
   imports: [
     BrowserModule,
+    NgChartsModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule
