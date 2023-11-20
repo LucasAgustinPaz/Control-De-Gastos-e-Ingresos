@@ -19,8 +19,9 @@ export class LoginComponent {
 
   onSubmit() {
     this.walletService.iniciarSesion(this.usuario.email, this.usuario.contrasena).subscribe(
-      (response: any) => {
-        console.log('Inicio de sesión exitoso:', response);
+      (datos: any) => {
+        console.log('Inicio de sesión exitoso:', datos);
+      
         // Guarda el mail en memoria local
         const userId = this.usuario.email;
         localStorage.setItem('userId', userId);

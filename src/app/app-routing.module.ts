@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CalendarioComponent } from './calendario/calendario.component';
-import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
 import { AnalisisComponent } from './analisis/analisis.component';
 import { TransaccionesComponent } from './transacciones/transacciones.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -11,24 +9,51 @@ import { RegisterComponent } from './register/register.component';
 import { NuevaCuentaComponent } from './nueva-cuenta/nueva-cuenta.component';
 import { LoginOscuroComponent } from './inicio-oscuro/login-oscuro.component';
 import { MetaFinancieraComponent } from './meta-financiera/meta-financiera.component';
-
-
-
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent }, // volver a borrar
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'registrarse', component: RegisterComponent },
-  { path: 'inicio', component: InicioComponent },  // volver a poner inicio
-  { path: 'calendario', component: CalendarioComponent },
-  { path: 'analisis', component: AnalisisComponent },
-  { path: 'transacciones', component: TransaccionesComponent },
-  { path: 'nuevaCuenta', component: NuevaCuentaComponent },
-  { path: 'inicioOscuro', component: LoginOscuroComponent },
-  { path: 'metaFinanciera', component: MetaFinancieraComponent },
+  {
+    path: 'inicio',
+    component: InicioComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'calendario',
+    component: CalendarioComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'analisis',
+    component: AnalisisComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'transacciones',
+    component: TransaccionesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'nuevaCuenta',
+    component: NuevaCuentaComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'inicioOscuro',
+    component: LoginOscuroComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'metaFinanciera',
+    component: MetaFinancieraComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

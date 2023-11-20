@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,7 +12,7 @@ export class WalletAPIService {
   private apiUrl = 'https://wallet37.p.rapidapi.com/wallet';
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'X-RapidAPI-Key': 'b34bd0cdebmsh494fe88111798c1p1ed41ajsncabc0fd70a57',
+    'X-RapidAPI-Key': 'd22179402fmshab48df51cde4adbp1000b6jsnede4de5e7c70',
     'X-RapidAPI-Host': 'wallet37.p.rapidapi.com',
   });
 
@@ -42,9 +43,10 @@ export class WalletAPIService {
   iniciarSesion(email: string, password: string): Observable<any> {
     const url = 'https://wallet37.p.rapidapi.com/user/sign-in';
     const data = { email, password };
-
+  
     return this.http.post(url, data, { headers: this.headers });
   }
+  
   // Nuevo método para crear una wallet
   crearWallet(walletData: any): Observable<any> {
     return this.http.post(this.apiUrl, walletData, { headers: this.headers });
