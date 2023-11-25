@@ -14,7 +14,7 @@
         </button>
         <div class="dropdown-content" [ngClass]="{'mostrar': mostrarMenu}">
           <a routerLink="/inicio">Modo Claro</a>
-          <a routerLink="/">Desconectarse</a>
+          <a (click)="cerrarSesion()">Desconectarse</a>
           <!-- Agrega más opciones según sea necesario -->
         </div>
       </div>
