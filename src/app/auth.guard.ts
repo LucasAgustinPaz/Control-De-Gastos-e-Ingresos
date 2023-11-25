@@ -1,3 +1,4 @@
+// auth.guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -14,26 +15,17 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | boolean {
-    const email = next.params['email'];
-    const password = next.params['password'];
+    // Obtener el userId del servicio WalletAPIService
+    const authFlag = this.walletService.existeUser();
+    console.log("user:",authFlag);
 
-    return this.walletService.iniciarSesion(email, password).pipe(
-      map((response) => {
-        const isAuthenticated = response && response.token;
+    if (authFlag != '1') {
+      // Si no hay userId, redirigir al usuario a la página de inicio de sesión
+      window.alert('No has iniciado sesión. Se requiere iniciar sesión para el ingreso.');
+      this.router.navigate(['/login']);
+      return false;
+    }
 
-        if (isAuthenticated) {
-          return true;
-        } else {
-          window.alert('No has iniciado sesión. Se requiere iniciar sesión para el ingreso.');
-          this.router.navigate(['/login']);
-          return false;
-        }
-      }),
-      catchError(() => {
-        window.alert('Error al intentar iniciar sesión. Inténtalo de nuevo.');
-        this.router.navigate(['/login']);
-        return of(false);
-      })
-    );
+    return true;
   }
 }

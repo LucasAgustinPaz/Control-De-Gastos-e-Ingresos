@@ -12,7 +12,7 @@ export class WalletAPIService {
   private apiUrl = 'https://wallet37.p.rapidapi.com/wallet';
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'X-RapidAPI-Key': 'd22179402fmshab48df51cde4adbp1000b6jsnede4de5e7c70',
+    'X-RapidAPI-Key': 'b34bd0cdebmsh494fe88111798c1p1ed41ajsncabc0fd70a57',
     'X-RapidAPI-Host': 'wallet37.p.rapidapi.com',
   });
 
@@ -30,6 +30,24 @@ export class WalletAPIService {
     const url = `https://wallet37.p.rapidapi.com/user/token/${token}`;
 
     return this.http.get(url, { headers: this.headers });
+  }
+
+  existeUser():string | null {
+    return localStorage.getItem('authFlag');
+  }
+
+  isLoggedIn(): boolean {
+    const authFlag = localStorage.getItem('authFlag');
+    if(authFlag == '1'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  // Método para cerrar sesión
+  cerrarSesion(): void {
+    localStorage.removeItem('authFlag');
   }
 
   // Nuevo método para obtener datos del usuario por ID

@@ -18,21 +18,21 @@ export class LoginComponent {
   constructor(private router: Router, private walletService: WalletAPIService) {}
 
   onSubmit() {
-    this.walletService.iniciarSesion(this.usuario.email, this.usuario.contrasena).subscribe(
-      (datos: any) => {
-        console.log('Inicio de sesión exitoso:', datos);
-      
-        // Guarda el mail en memoria local
-        const userId = this.usuario.email;
-        localStorage.setItem('userId', userId);
+    this.walletService.iniciarSesion(this.usuario.email, this.usuario.contrasena)
+      .subscribe(
+        (datos: any) => {
+          console.log('Inicio de sesión exitoso:', datos);
 
-        // Redirige al usuario a la página principal después de iniciar sesión
-        this.router.navigate(['/inicio']);
-      },
-      (error: any) => {
-        console.error('Inicio de sesión fallido. Verifica tus credenciales.', error);
-        // Puedes manejar el error aquí (por ejemplo, mostrar un mensaje de error al usuario)
-      }
-    );
+          // Establece el flag de autenticación en 1
+          localStorage.setItem('authFlag', '1');
+
+          // Redirige al usuario a la página principal después de iniciar sesión
+          this.router.navigate(['/inicio']);
+        },
+        (error: any) => {
+          console.error('Inicio de sesión fallido. Verifica tus credenciales.', error);
+          // Puedes manejar el error aquí (por ejemplo, mostrar un mensaje de error al usuario)
+        }
+      );
   }
 }

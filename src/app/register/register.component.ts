@@ -20,7 +20,8 @@ export class RegisterComponent {
   onSubmit() {
     this.walletService.crearUsuario(this.usuarioData).subscribe(
       (response: any) => {
-        console.log('Usuario creado con éxito:', response);
+        localStorage.setItem('userId', this.usuarioData.email);
+        console.log('Usuario creado con éxito:', response); 
         this.router.navigate(['/']);
       },
       (error: any) => {
